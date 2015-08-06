@@ -1,0 +1,26 @@
+node_modules
+public
+.tmp
+.idea
+client/bower_components
+dist
+/server/config/local.env.js
+
+
+# Ignore bower config #
+.bowerrc
+
+# Ignore test results file#
+test-results.xml
+### Node ###
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
