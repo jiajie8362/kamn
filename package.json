@@ -20,6 +20,9 @@
   "dependencies": {
     "koa": "^0.21.0",
     "koa-bodyparser": "^2.0.0",
-    "koa-router": "^5.1.2"
+    "koa-router": "^5.1.2",
+    "koa-static-cache": "^3.1.2",
+    "koa.io": "0.0.3",
+    "mongoose": "^4.1.1"
   }
 }
