@@ -13,11 +13,12 @@ module.exports = function(app) {
 		app.use(logger());
 	}
 
-	app.use(bodyParser);
+	app.use(bodyParser());
 
 	// register special controllers which should come before any jwt token check and be publicly accessible
 
 	// serve the static files in the /client directory, use caching only in production (7 days)
+
 	var sendOpts = config.app.env === 'production' ? {
 		root: 'client',
 		maxage: config.app.cacheTime
@@ -44,11 +45,16 @@ module.exports = function(app) {
 	});
 
 	// middleware below this line is only reached if jwt token is valid
-	app.use(jwt({
+	/*app.use(jwt({
 		secret: config.app.secret
-	}));
+	}));*/
 
-	// mount all the routes defined in the api controllers
+	// mount all the models 
+	fs.readdirSync('./server/models').forEach(function(file) {
+		require('../models/' + file);
+	});
+
+	// mount all the routes 
 	fs.readdirSync('./server/controllers').forEach(function(file) {
 		require('../controllers/' + file).init(app);
 	});

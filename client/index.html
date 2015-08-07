@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="kman">
+<html lang="en">
 <head>
   <base href="/">
   <meta charset="utf-8">
@@ -11,21 +11,18 @@
 </head>
 
 <body ng-app="app">
-
+<!-- Add your site or application content here -->
+<div ng-include src="'modules/core/shell.html'"></div>
 
 <script src="/bower_components/jquery/dist/jquery.js"></script>
 <script src="/bower_components/lodash/lodash.js"></script>
 <script src="/bower_components/angular/angular.js"></script>
 <script src="/bower_components/angular-animate/angular-animate.js"></script>
-<script src="/bower_components/angular-route/angular-route.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/angular-messages/angular-messages.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
 <script src="/app.js"></script>
-<script src="/modules/common/common.js"></script>
-<script src="/modules/common/api-service.js"></script>
-<script src="/modules/home/home.js"></script>
-<script src="/modules/home/home-controller.js"></script>
-<script src="/modules/profile/profile.js"></script>
-<script src="/modules/profile/profile-controller.js"></script>
+<script src="/modules/core/shell.controller.js"></script>
 </body>
 </html>
