@@ -16,9 +16,14 @@ function TodoController() {
   todo1.title = "East breakfast";
   var todo2 = new todoItem();
   todo2.title = "East Lunch";
+  var todo3 = new todoItem();
+  todo3.title = "East dinner";
+  todo3.isDone = true
+  vm.todoList = [todo1, todo2,todo3];
 
-  vm.todoList = [todo1, todo2];
-
+  vm.changeItemStatus = changeItemStatus;
+  vm.markAll = markAll;
+  
   activate();
 
   function todoItem() {
@@ -28,5 +33,15 @@ function TodoController() {
 
   function activate() {
     console.log('TodoController loaded!');
+  }
+
+  function changeItemStatus(item){
+    item.isDone = !item.isDone;
+  }
+
+  function markAll(isDone){
+    vm.todoList.forEach(function(item){
+      item.isDone = isDone;
+    });
   }
 }

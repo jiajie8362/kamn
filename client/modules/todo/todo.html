@@ -4,14 +4,15 @@
        <div class="todolist not-done">
           <h1>Todos</h1>
           <input class="form-control add-todo" placeholder="Add todo"></input>
-          <button id="checkAll" class="btn btn-success">Mark all as done</button>
+          <button id="checkAll" class="btn btn-success" ng-click="vm.markAll(true)">Mark all as done</button>
           <hr>
           <ul id="sortable" class="list-unstyled">
-          <li data-ng-repeat="item in vm.todoList" class="ui-state-default">
+          <li data-ng-repeat="item in vm.todoList | filter:{isDone : false}" class="ui-state-default">
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" value=""/>   
-                  {{item.title}}                 
+                  <input type="checkbox" value=""  ng-click="vm.changeItemStatus(item)" />   
+                  {{item.title}}     
+                  {{item.isDone}}             
                 </label>
               </div>
           </li> 
@@ -21,11 +22,15 @@
     <div class="col-md-6">
       <div class="todolist">
         <h1>Already Done</h1>
+        <button id="checkAll" class="btn btn-success" ng-click="vm.markAll(false)">Mark all as not done</button>
         <ul id="doneitems" class="list-unstyled">
-          <li>
-          <button class="remove-item btn btn-default btn-xs pull-right">
-            <span class="glyphicon glyphicon-remove"></span>
-          </button>
+          <li data-ng-repeat="item in vm.todoList | filter:{isDone : true}" class="ui-state-default">
+          <div class="checkbox">    
+              <label>
+                  <input type="checkbox" value="" ng-click="vm.changeItemStatus(item)"/>  
+                      {{item.title}}             
+              </label>        
+          </div>
           </li>
         </ul>
       </div>
