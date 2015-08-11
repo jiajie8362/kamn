@@ -3,7 +3,10 @@
     <div class="col-md-6">
        <div class="todolist not-done">
           <h1>Todos</h1>
-          <input class="form-control add-todo" placeholder="Add todo"></input>
+          <form ng-submit="vm.addTodo(vm.newTodo)">
+            <input type="text" class="form-control add-todo" placeholder="Add todo" ng-model="vm.newTodo"></input>
+            <input type="submit" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
+          </form>
           <button id="checkAll" class="btn btn-success" ng-click="vm.markAll(true)">Mark all as done</button>
           <hr>
           <ul id="sortable" class="list-unstyled">
@@ -11,7 +14,7 @@
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value=""  ng-click="vm.changeItemStatus(item)" />   
-                  {{item.title}}     
+                  {{item.content}}     
                   {{item.isDone}}             
                 </label>
               </div>
@@ -28,7 +31,7 @@
           <div class="checkbox">    
               <label>
                   <input type="checkbox" value="" ng-click="vm.changeItemStatus(item)"/>  
-                      {{item.title}}             
+                      {{item.content}}             
               </label>        
           </div>
           </li>

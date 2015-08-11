@@ -5,11 +5,7 @@ var todoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  isDone: {
-    type: boolean,
-    required: true,
-    default: false
-  }
+  isDone: Boolean,
   createdAt: {
     type: Date,
     default: Date.now

@@ -9,39 +9,48 @@ angular.module('app').controller('todoController', TodoController);
  * @param $scope
  * @constructor
  */
-function TodoController() {
+function TodoController(datacontext) {
   var vm = this;
-
-  var todo1 = new todoItem();
-  todo1.title = "East breakfast";
-  var todo2 = new todoItem();
-  todo2.title = "East Lunch";
-  var todo3 = new todoItem();
-  todo3.title = "East dinner";
-  todo3.isDone = true
-  vm.todoList = [todo1, todo2,todo3];
 
   vm.changeItemStatus = changeItemStatus;
   vm.markAll = markAll;
-  
-  activate();
+  vm.addTodo = addTodo;
 
-  function todoItem() {
-    this.title = '';
-    this.isDone = false;
-  }
+  activate();
 
   function activate() {
     console.log('TodoController loaded!');
+    datacontext.getTodoList()
+      .then(function(data) {
+        console.log('get todo list from server');
+        vm.todoList = data;
+        console.log(vm.todoList);
+      });
   }
 
-  function changeItemStatus(item){
+  function addTodo(newTodo) {
+    console.log('new todo ' + newTodo);
+    datacontext.createNewTodo({
+      content: newTodo
+    }).then(function(data) {
+      vm.todoList.push(newTodo);
+    });
+  }
+
+  function updateTodoItem(item) {
+    datacontext.updateTodo(item);
+  }
+
+  function changeItemStatus(item) {
     item.isDone = !item.isDone;
+    updateTodoItem(item);
   }
 
-  function markAll(isDone){
-    vm.todoList.forEach(function(item){
+  function markAll(isDone) {
+    vm.todoList.forEach(function(item) {
       item.isDone = isDone;
     });
   }
 }
+
+TodoController.$inject = ['datacontext'];
