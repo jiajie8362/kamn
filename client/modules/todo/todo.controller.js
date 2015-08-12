@@ -7,9 +7,11 @@ angular.module('app').controller('todoController', TodoController);
  * @class modules.todo.TodoController
  * @desc manages all Todo list functionality
  * @param $scope
+ * @param $timeout
+ * @param datacontext 
  * @constructor
  */
-function TodoController(datacontext) {
+function TodoController($scope, $timeout, datacontext) {
   var vm = this;
 
   vm.changeItemStatus = changeItemStatus;
@@ -17,6 +19,17 @@ function TodoController(datacontext) {
   vm.addTodo = addTodo;
 
   activate();
+
+  var timeout;
+  $scope.$watch('vm.newTodo', function(newTodo) {
+    if (!newTodo)
+      return;
+    if (timeout)
+      $timeout.cancel(timeout);
+    timeout = $timeout(function() {
+      console.log('newTodo');
+    }, 300)
+  });
 
   function activate() {
     console.log('TodoController loaded!');
@@ -33,7 +46,7 @@ function TodoController(datacontext) {
     datacontext.createNewTodo({
       content: newTodo
     }).then(function(data) {
-      vm.todoList.push(newTodo);
+      vm.todoList.push(data);
     });
   }
 
@@ -53,4 +66,4 @@ function TodoController(datacontext) {
   }
 }
 
-TodoController.$inject = ['datacontext'];
+TodoController.$inject = ['$scope', '$timeout', 'datacontext'];

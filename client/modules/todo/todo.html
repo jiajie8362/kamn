@@ -14,7 +14,7 @@
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value=""  ng-click="vm.changeItemStatus(item)" />   
-                  {{item.content}}     
+                  {{item.content | capitalize }}      
                   {{item.isDone}}             
                 </label>
               </div>
