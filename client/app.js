@@ -9,7 +9,7 @@ angular.module('app', [
   'ngMessages'
 
 ]).config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-  $urlRouterProvider.otherwise("/todo");
+  $urlRouterProvider.otherwise("/otherwise");
 
   $stateProvider.
   state('login', {
@@ -19,11 +19,25 @@ angular.module('app', [
     controller: 'loginController',
     controllerAs: 'vm'
   }).
+  state('register', {
+    url: '/register',
+    templateUrl: 'modules/register/register.html',
+    title: 'register',
+    controller: 'registerController',
+    controllerAs: 'vm'
+  }).
   state('todo', {
     url: '/todo',
     templateUrl: 'modules/todo/todo.html',
     title: 'todo',
     controller: 'todoController',
+    controllerAs: 'vm'
+  }).
+  state('otherwise', {
+    url: '/login',
+    templateUrl: 'modules/login/login.html',
+    title: 'login',
+    controller: 'loginController',
     controllerAs: 'vm'
   })
 });
